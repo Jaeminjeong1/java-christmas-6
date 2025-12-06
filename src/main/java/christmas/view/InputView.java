@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.regex.Pattern;
 
 import static christmas.utils.ErrorMessage.DAY_INPUT_ERROR;
+import static christmas.utils.ErrorMessage.MENU_INPUT_ERROR;
 
 public class InputView {
 
@@ -33,7 +34,7 @@ public class InputView {
         System.out.println(MENU_INPUT);
         String input = Console.readLine();
 
-        validateEmptyInput(input);
+        validateEmptyMenuInput(input);
 
         return input;
     }
@@ -49,4 +50,11 @@ public class InputView {
             throw new IllegalArgumentException(DAY_INPUT_ERROR.getMessage());
         }
     }
+
+    private void validateEmptyMenuInput(String userInput) {
+        if (userInput == null || userInput.isBlank()) {
+            throw new IllegalArgumentException(MENU_INPUT_ERROR.getMessage());
+        }
+    }
+
 }
