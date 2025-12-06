@@ -12,4 +12,7 @@ public class OutputView {
         return new OutputView();
     }
 
+    public void startString() {
+        System.out.println(START);
+    }
 }
