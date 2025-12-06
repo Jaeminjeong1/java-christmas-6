@@ -24,4 +24,8 @@ public class DayOfMonth {
             throw new IllegalArgumentException (DAY_INPUT_ERROR.getMessage());
         }
     }
+
+    public int getValue() {
+        return value;
+    }
 }

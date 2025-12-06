@@ -22,4 +22,19 @@ public class VisitDay {
 
         return new VisitDay(dayOfMonth, dayOfWeek);
     }
+
+    public int getDay() {
+        return dayOfMonth.getValue();
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public boolean isWeekend() {
+        if (dayOfWeek == DayOfWeek.FRI) {
+            return true;
+        }
+        return dayOfWeek == DayOfWeek.SAT;
+    }
 }
