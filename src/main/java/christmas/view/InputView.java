@@ -19,4 +19,34 @@ public class InputView {
         return new InputView();
     }
 
+    public int inputDay() {
+        System.out.println(DAY_INPUT);
+        String input = Console.readLine();
+
+        validateEmptyInput(input);
+        validateNumberFormat(input);
+
+        return Integer.parseInt(input);
+    }
+
+    public String inputMenu() {
+        System.out.println(MENU_INPUT);
+        String input = Console.readLine();
+
+        validateEmptyInput(input);
+
+        return input;
+    }
+
+    private void validateEmptyInput(String userInput) {
+        if (userInput == null || userInput.isBlank()) {
+            throw new IllegalArgumentException(DAY_INPUT_ERROR.getMessage());
+        }
+    }
+
+    private void validateNumberFormat(String userInput) {
+        if (!NUMBER_PATTERN.matcher(userInput).matches()) {
+            throw new IllegalArgumentException(DAY_INPUT_ERROR.getMessage());
+        }
+    }
 }
