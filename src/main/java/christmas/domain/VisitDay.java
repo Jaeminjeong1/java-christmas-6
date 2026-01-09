@@ -32,9 +32,6 @@ public class VisitDay {
     }
 
     public boolean isWeekend() {
-        if (dayOfWeek == DayOfWeek.FRI) {
-            return true;
-        }
-        return dayOfWeek == DayOfWeek.SAT;
+        return dayOfWeek.equals(DayOfWeek.FRI) || dayOfWeek.equals(DayOfWeek.SAT);
     }
 }

@@ -73,41 +73,69 @@ public class Order {
     }
 
     private static void validateTotalCount(Map<Menu, Integer> parsed) {
-        int total = parsed.values().stream()
-            .mapToInt(Integer::intValue)
-            .sum();
+        int total = 0;
+        for (Integer count : parsed.values()) {
+            total += count;
+        }
         if (total > MAX_COUNT) {
             throw new IllegalArgumentException(MENU_INPUT_ERROR.getMessage());
         }
     }
 
     private static void validateDrinkOnly(Map<Menu, Integer> parsed) {
-        long drinkCount = parsed.keySet().stream()
-            .filter(menu -> menu.getMenuCategory() == MenuCategory.DRINK)
-            .count();
+        int drinkCount = 0;
+
+        for (Menu menu : parsed.keySet()) {
+            if (menu.getMenuCategory() == MenuCategory.DRINK) {
+                drinkCount++;
+            }
+        }
+
         if (drinkCount == parsed.size()) {
             throw new IllegalArgumentException(MENU_INPUT_ERROR.getMessage());
         }
     }
 
     public int getTotalPrice() {
-        return items.entrySet().stream()
-            .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
-            .sum();
+        int totalPrice = 0;
+
+        for (Map.Entry<Menu, Integer> entry : items.entrySet()) {
+            Menu menu = entry.getKey();
+            int quantity = entry.getValue();
+            totalPrice += menu.getPrice() * quantity;
+        }
+
+        return totalPrice;
     }
 
     public int getMainCount() {
-        return items.entrySet().stream()
-            .filter(entry -> entry.getKey().getMenuCategory() == MenuCategory.MAIN)
-            .mapToInt(Map.Entry::getValue)
-            .sum();
+        int mainCount = 0;
+
+        for (Map.Entry<Menu, Integer> entry : items.entrySet()) {
+            Menu menu = entry.getKey();
+            int quantity = entry.getValue();
+
+            if (menu.getMenuCategory() == MenuCategory.MAIN) {
+                mainCount += quantity;
+            }
+        }
+
+        return mainCount;
     }
 
     public int getDessertCount() {
-        return items.entrySet().stream()
-            .filter(entry -> entry.getKey().getMenuCategory() == MenuCategory.DESSERT)
-            .mapToInt(Map.Entry::getValue)
-            .sum();
+        int dessertCount = 0;
+
+        for (Map.Entry<Menu, Integer> entry : items.entrySet()) {
+            Menu menu = entry.getKey();
+            int quantity = entry.getValue();
+
+            if (menu.getMenuCategory() == MenuCategory.DESSERT) {
+                dessertCount += quantity;
+            }
+        }
+
+        return dessertCount;
     }
 
     public Map<Menu, Integer> getItems() {
